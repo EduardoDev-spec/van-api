@@ -1,7 +1,12 @@
 import re
 from pydantic import BaseModel, EmailStr, ConfigDict, field_validator
+<<<<<<< HEAD
 from typing import Optional, Literal
 from datetime import datetime, date
+=======
+from typing import Optional
+from datetime import datetime
+>>>>>>> a248c5bcbe75973cf774005ddd712eb06ebcc5d8
 from validate_docbr import CPF
 from app.database.models.user import UserRole, UserStatus
 
@@ -45,6 +50,7 @@ class UserMeResponse(BaseModel):
     role: UserRole
     status: UserStatus
 
+<<<<<<< HEAD
     model_config = ConfigDict(from_attributes=True)
 
 
@@ -54,3 +60,6 @@ class AttendanceCreate(BaseModel):
     is_confirmed: bool = True
     transport_mode: Optional[Literal["ida_e_volta", "so_ida", "so_volta"]] = None
 
+=======
+    model_config = ConfigDict(from_attributes=True)
+>>>>>>> a248c5bcbe75973cf774005ddd712eb06ebcc5d8

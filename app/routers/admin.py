@@ -1,16 +1,26 @@
+<<<<<<< HEAD
 from typing import List, Literal
+=======
+from typing import List
+>>>>>>> a248c5bcbe75973cf774005ddd712eb06ebcc5d8
 from fastapi import APIRouter, HTTPException, status, Depends
 from pydantic import BaseModel
 
 from app.database.database import db_dependency
 from app.database.models.user import User, UserStatus, UserRole
+<<<<<<< HEAD
 from app.database.models.attendance import Attendance
+=======
+>>>>>>> a248c5bcbe75973cf774005ddd712eb06ebcc5d8
 from app.schemas.users import UserResponse
 from app.schemas.admin import UserAdminResponse
 from app.routers.auth import user_dependency
 from app.schemas.admin import UpdateStatusRequest
 from typing import Optional
+<<<<<<< HEAD
 from datetime import date
+=======
+>>>>>>> a248c5bcbe75973cf774005ddd712eb06ebcc5d8
 
 router = APIRouter(prefix="/admin", tags=["Admin"])
 
@@ -54,13 +64,20 @@ async def update_user_status(user_id: int, db:db_dependency, user: user_dependen
     return target_user
 
 @router.delete("/users/{user_id}/deleted")
+<<<<<<< HEAD
 async def delete_user(user_id: int, user: user_dependency, db: db_dependency):
     if user['role'] != UserRole.ADMIN.value:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Acesso negado.")
+=======
+async def delete_user(user_id: int, user: user_dependency, db:db_dependency):
+    if user['role'] != UserRole.ADMIN.value:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Acesso negado.")
+>>>>>>> a248c5bcbe75973cf774005ddd712eb06ebcc5d8
 
     target_user = db.query(User).filter(User.id == user_id, User.role == UserRole.STUDENT).first()
 
     if not target_user:
+<<<<<<< HEAD
         raise HTTPException(status_code=404, detail="Usuário não encontrado.")
 
     # 1. Apaga primeiro os registros de presença vinculados a este usuário para evitar o erro de chave estrangeira
@@ -117,3 +134,10 @@ async def get_attendances(
             "so_volta": so_volta
         }
     }
+=======
+            raise HTTPException(status_code=404, detail="Usuário não encontrado.")
+
+    db.delete(target_user)
+    db.commit()
+    return {"detail": "Usuário deletado com sucesso."}
+>>>>>>> a248c5bcbe75973cf774005ddd712eb06ebcc5d8
