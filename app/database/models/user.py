@@ -2,10 +2,7 @@ import enum
 from sqlalchemy import Column, String, Integer, Boolean, DateTime, Enum
 from sqlalchemy import func
 from app.database.database import Base
-<<<<<<< HEAD
 from sqlalchemy.orm import relationship
-=======
->>>>>>> a248c5bcbe75973cf774005ddd712eb06ebcc5d8
 
 class UserRole(str, enum.Enum):
     STUDENT  = "student"
@@ -38,10 +35,6 @@ class User(Base):
     
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
-<<<<<<< HEAD
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
     attendances = relationship("Attendance", back_populates="student")
-=======
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
->>>>>>> a248c5bcbe75973cf774005ddd712eb06ebcc5d8

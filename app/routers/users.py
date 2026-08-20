@@ -1,15 +1,8 @@
 from fastapi import APIRouter, HTTPException, status
-<<<<<<< HEAD
 from app.database.database import db_dependency
 from app.database.models.user import User
 from app.database.models.attendance import Attendance
 from app.schemas.users import UserCreate, UserResponse, UserMeResponse, AttendanceCreate, UserRole
-=======
-# Repare que agora importamos o db_dependency direto do database
-from app.database.database import db_dependency
-from app.database.models.user import User
-from app.schemas.users import UserCreate, UserResponse, UserMeResponse
->>>>>>> a248c5bcbe75973cf774005ddd712eb06ebcc5d8
 from app.core.security import get_password_hash
 from app.routers.auth import user_dependency
 
@@ -39,16 +32,12 @@ def create_user(user: UserCreate, db: db_dependency):
 
 @router.get('/me', response_model=UserMeResponse)
 async def read_current_user(db: db_dependency, current_user: user_dependency):
-<<<<<<< HEAD
 
     
-=======
->>>>>>> a248c5bcbe75973cf774005ddd712eb06ebcc5d8
     user = db.query(User).filter(User.id == current_user['id']).first()
 
     if not user:
         raise HTTPException(status_code=404, detail="Usuário não encontrado.")
-<<<<<<< HEAD
     return user
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -127,6 +116,3 @@ async def delete_attendances(user: user_dependency, db: db_dependency, attendanc
     db.commit()
     
     return {"message": "Agendamento deletado com sucesso."}
-=======
-    return user
->>>>>>> a248c5bcbe75973cf774005ddd712eb06ebcc5d8
