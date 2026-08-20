@@ -33,8 +33,6 @@ def create_user(user: UserCreate, db: db_dependency):
 @router.get('/me', response_model=UserMeResponse)
 async def read_current_user(db: db_dependency, current_user: user_dependency):
 
-    if user['role'] != UserRole.STUDENT.value:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Acesso negado.")
     
     user = db.query(User).filter(User.id == current_user['id']).first()
 
@@ -90,3 +88,31 @@ async def confirm_attendance(user: user_dependency, db: db_dependency, attendanc
     db.refresh(new_attendance)
 
     return new_attendance
+
+@router.get("/attendances")
+async def get_attendances(user: user_dependency, db: db_dependency):
+    user_id = user.get('id') 
+    
+    attendances = db.query(Attendance).filter(Attendance.user_id == user_id).all()
+    
+    return attendances
+
+@router.delete('/attendances/{attendance_date}/deleted')
+async def delete_attendances(user: user_dependency, db: db_dependency, attendance_date: str):
+    if user.get('role') != UserRole.STUDENT.value:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Acesso negado.")
+    
+    logged_user_id = user.get('id')
+    
+    attendance = db.query(Attendance).filter(
+        Attendance.user_id == logged_user_id,
+        Attendance.date == attendance_date 
+    ).first()
+    
+    if not attendance:
+        raise HTTPException(status_code=404, detail="Agendamento não encontrado.")
+    
+    db.delete(attendance)
+    db.commit()
+    
+    return {"message": "Agendamento deletado com sucesso."}

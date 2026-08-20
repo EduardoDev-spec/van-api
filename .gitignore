@@ -1,0 +1,21 @@
+# Ambiente virtual do Python
+.venv/
+venv/
+ENV/
+
+# Arquivos de cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Configurações de ambiente (contém senhas e chaves secretas!)
+.env
+
+# Banco de dados local SQLite (se preferir não subir a base de dados de teste)
+*.db
+*.sqlite
+*.sqlite3
+
+# Arquivos de IDE
+.vscode/
+.idea/
