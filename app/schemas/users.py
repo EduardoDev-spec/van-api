@@ -45,16 +45,4 @@ class UserMeResponse(BaseModel):
     role: UserRole
     status: UserStatus
 
-<<<<<<< HEAD
     model_config = ConfigDict(from_attributes=True)
-
-
-class AttendanceCreate(BaseModel):
-    data: date
-    shift: Literal["morning", "night"]
-    is_confirmed: bool = True
-    transport_mode: Optional[Literal["ida_e_volta", "so_ida", "so_volta"]] = None
-
-=======
-    model_config = ConfigDict(from_attributes=True)
->>>>>>> a248c5bcbe75973cf774005ddd712eb06ebcc5d8
