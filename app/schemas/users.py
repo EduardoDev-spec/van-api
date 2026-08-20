@@ -1,12 +1,7 @@
 import re
 from pydantic import BaseModel, EmailStr, ConfigDict, field_validator
-<<<<<<< HEAD
-from typing import Optional, Literal
-from datetime import datetime, date
-=======
 from typing import Optional
 from datetime import datetime
->>>>>>> a248c5bcbe75973cf774005ddd712eb06ebcc5d8
 from validate_docbr import CPF
 from app.database.models.user import UserRole, UserStatus
 
