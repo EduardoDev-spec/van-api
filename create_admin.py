@@ -2,11 +2,8 @@ from getpass import getpass
 
 from app.database.database import SessionLocal
 from app.database.models.user import User, UserRole, UserStatus
-<<<<<<< HEAD
-# Importação adicionada para corrigir o erro do Mapper:
+
 from app.database.models.attendance import Attendance 
-=======
->>>>>>> a248c5bcbe75973cf774005ddd712eb06ebcc5d8
 from app.core.security import get_password_hash
 
 

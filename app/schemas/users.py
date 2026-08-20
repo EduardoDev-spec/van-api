@@ -1,7 +1,7 @@
 import re
 from pydantic import BaseModel, EmailStr, ConfigDict, field_validator
-from typing import Optional
-from datetime import datetime
+from typing import Optional, Literal
+from datetime import datetime, date
 from validate_docbr import CPF
 from app.database.models.user import UserRole, UserStatus
 
@@ -46,3 +46,11 @@ class UserMeResponse(BaseModel):
     status: UserStatus
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class AttendanceCreate(BaseModel):
+    data: date
+    shift: Literal["morning", "night"]
+    is_confirmed: bool = True
+    transport_mode: Optional[Literal["ida_e_volta", "so_ida", "so_volta"]] = None
+
